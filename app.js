@@ -19,6 +19,7 @@ function saveTask(e) {
       localStorage.setItem('tasks', JSON.stringify(tasks));
 
     }
+    getTasks()
 
     e.preventDefault();
 }
@@ -29,10 +30,28 @@ function getTasks() {
     tasksView.innerHTML = '';
 
     for(let i= 0; i < tasks.length; i++){
-      tasksView.innerHTML = `<div class) >
+        let title = tasks[i].title;
+        let description = tasks[i].description;
+      tasksView.innerHTML += `<div class="card mb-4" >
+<div class="card-body">
+<p>${title} - ${description}</p>
+<a class="btn btn-danger" onclick="deleteTask('${title}')">delete</a>
+
+</div>
 
 </div>`
     }
+}
+function deleteTask(title) {
+    let tasks = JSON.parse(localStorage.getItem('tasks'));
+    for ( let i = 0; i < tasks.length; i++) {
+        if (tasks[i].title === title){
+            tasks.splice(i, 1);
+        }
+    }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    getTasks();
+
 }
 
 getTasks();
