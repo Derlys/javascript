@@ -19,8 +19,8 @@ function saveTask(e) {
       localStorage.setItem('tasks', JSON.stringify(tasks));
 
     }
-    getTasks()
-
+    getTasks();
+    document.getElementById('formTasks').reset();
     e.preventDefault();
 }
 function getTasks() {
@@ -42,6 +42,7 @@ function getTasks() {
 </div>`
     }
 }
+
 function deleteTask(title) {
     let tasks = JSON.parse(localStorage.getItem('tasks'));
     for ( let i = 0; i < tasks.length; i++) {
